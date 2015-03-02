@@ -1,4 +1,4 @@
-<polymer-element name="g-file" attributes="title class accept isDirectory multiple onChange sample">
+<polymer-element name="g-file" attributes="text clazz accept isDirectory multiple onChange sample">
 	<template>
 		<link rel="stylesheet" href="g-file.css">
 
@@ -11,24 +11,24 @@
 					</span>
 				</span>
 				<a 	id="button" 
-					class="btn btn-default {{class}}"
+					class="btn btn-default {{clazz}}"
 					style="width: 100%"
 					on-click="{{ triggerFileSelect }}">
-					{{title}}
+					{{text}}
 				</a>
 			</div>
 		</template>
 
 		<template if="{{ !sample }}">
-			<a id="button" on-click="{{ triggerFileSelect }}" class="btn btn-default {{class}}" style="width: 100%">
-				{{title}}
+			<a id="button" on-click="{{ triggerFileSelect }}" class="btn btn-default {{clazz}}" style="width: 100%">
+				{{text}}
 			</a>
 		</template>
 
 		<input 	id="file"
 				type="file"
 				class="hidden"
-				on-change="{{ onFileSelected }}" title="{{title}}" accept="{{ accept ? accep : '*' }}" 
+				on-change="{{ onFileSelected }}" title="{{text}}" accept="{{ accept ? accept : '*' }}" 
 				multiple?="{{ multiple }}"
 				webkitdirectory?="{{ isDirectory }}"
 				directory?="{{ isDirectory }}" />
@@ -99,7 +99,7 @@
 
     		onFileSelected: function() {
     			
-				var label = this.title;
+				var label = this.text;
 				var files  = this.getFiles();
 				if(files.length > 0)
 				{
@@ -116,8 +116,7 @@
 				}
 
 				$(this.$.button).text(label);
-				$g.utils.apply(this.onChange, this.isDirectory ? [files] : files);
-				//this.fire('file-selected', {files : files});
+				this.onChange.apply(this, this.isDirectory ? [files] : files);				
 			},
 			
 			onDragEnter: function(evt, detail, sender) {
