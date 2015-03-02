@@ -1,0 +1,26 @@
+<link rel="import" href="g-file.html">
+
+<polymer-element name="g-file-sample">
+	<template>
+		<link rel="stylesheet" href="g-file.css">
+		<dl class="dl-horizontal" style="margin: 30px 0px;">
+			<dt>Text:</dt>
+			<dd><input class="form-control" type="text" value="{{ text }}" /></dd>
+			<dt>Sample:</dt>
+			<dd><input class="form-control" type="text" value="{{ sample }}" /></dd>
+			<dt>Accept:</dt>
+			<dd><input class="form-control" type="text" value="{{ accept }}" /></dd>
+			<dt>Directory:</dt>
+			<dd><input class="form-control" type="text" value="{{ isDirectory }}" /></dd>
+		</dl>
+		<g-file text="{{ text }}" sample="{{ sample }}" accept="{{ accept }}" isDirectory="{{ isDirectory }}"></g-file>
+	</template>		
+	<script>
+    	Polymer({
+			sample: 'https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.19.tar.xz',
+			text: 'Click here!',
+			accept: '.jpg',
+			isDirectory: false,
+		});
+	</script>
+</polymer-element>
